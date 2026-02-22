@@ -1,28 +1,35 @@
-# 📚 Autonomous Market-Intelligence Scraper
+📚 Autonomous Market-Intelligence & Price Monitor
+This industrial-grade Python tool automates the process of monitoring e-commerce data to find high-value products. It scrapes live data, performs statistical analysis, and delivers real-time "Buy Alerts" and market snapshots to a Discord channel.
 
-An industrial-grade web scraper that monitors e-commerce data, performs price analysis, and sends real-time investment alerts via Discord.
+🚀 Key Features
+Multi-Page Autonomous Crawling: Uses pagination logic to traverse the site (up to a set page limit) without manual intervention.
 
-## 🛠️ Tech Stack
-- **Python 3.12**
-- **BeautifulSoup4** (Parsing)
-- **Pandas** (Data Structuring)
-- **Discord Webhooks** (Real-time Alerts)
+Real-time Discord Alerts: Instantly notifies a Discord channel when a "5-star" rated book under £20 is discovered.
 
-## 🤖 Features
-- **Pagination Logic:** Automatically traverses multiple pages via "Next" buttons.
-- **Data Cleaning:** Converts raw HTML currency strings into float values for analysis.
-- **Smart Filtering:** Only alerts users for high-rated products (5 stars) under a specific budget (£20).
-- **Persistence:** Exports full market snapshots to CSV for historical tracking.
+Data Persistence & Cleaning: Exports a full market snapshot to CSV, automatically removing duplicate entries and sorting by the best deals (Rating/Price).
 
-## 📊 Market Snapshot
-> This tool generates a CSV of all books found. Below is a sample of the data captured:
-| Title | Price | Rating |
-| :--- | :--- | :--- |
-| Scott Pilgrim's Precious Little Life | £21.01 | 5 |
-| Set Me Free | £17.46 | 5 |
+Visual Market Analytics: Generates a Matplotlib-based price distribution histogram to help visualize market trends.
 
-## ⚙️ Setup
-1. Clone the repo.
-2. Run `pip install -r requirements.txt`.
-3. Add your webhook URL to `config.py`.
-4. Execute `python scraper.py`.
+Automated Reporting: Uploads the visual chart directly to Discord at the end of every run for team or personal review.
+
+🛠️ Tech Stack
+Python 3.x: Core logic.
+
+BeautifulSoup4: HTML parsing and data extraction.
+
+Pandas: Data manipulation and CSV management.
+
+Matplotlib: Data visualization and report generation.
+
+Requests: Web communication and Discord Webhook integration.
+
+📊 How it Works (Logic Flow)
+Extraction: The script visits the book catalog and extracts the Title, Price, UPC, and Rating for every item.
+
+Filtering: It runs a comparison against a "Keyword" list and specific business logic (Rating > 4 and Price < £20).
+
+Communication: High-value items are sent as "Embeds" to Discord via Webhooks.
+
+Analysis: Once all pages are scraped, it builds a DataFrame to find the average price distribution.
+
+Visualization: A PNG report is generated and uploaded to the cloud.
