@@ -70,12 +70,14 @@ while current_url and page_count < 3:
             send_discord_alert(item)
             print(f"📢 Alert sent to Discord for: {title}")
             print(f"MATCH FOUND: {upc} | {title} | {is_match} | ({rating_num} stars) at £{num} | {book_url}")
-        next_btn = soup.find("li", class_="next")
+    next_btn = soup.find("li", class_="next")
     if next_btn:
-        next_page_path=next_btn.find("a")["href"]
+        next_page_path = next_btn.find("a")["href"]
         if "catalogue/" in next_page_path:
             current_url = "https://books.toscrape.com/" + next_page_path
-            time. sleep(1)        
+        else:
+            current_url = "https://books.toscrape.com/catalogue/" + next_page_path
+        time.sleep(1) 
     else:
         current_url = None
 
@@ -85,6 +87,7 @@ date_str=datetime.now().strftime("%Y_%b_%d")
 filename = f"scrape_results_{date_str}.csv"
 
 df = df.sort_values(by=["rating", "price"], ascending=[False, True])
+df = df.drop_duplicates(subset=['UPC'], keep='first')
 df.to_csv("all_books.csv", index=False)
 
 print("-" * 30)
