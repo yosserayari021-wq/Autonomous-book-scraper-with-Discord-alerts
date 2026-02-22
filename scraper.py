@@ -5,8 +5,15 @@ from datetime import datetime
 import random
 import time
 import matplotlib.pyplot as plt
-from config import WEBHOOK_URL
-from playwright.sync_api import sync_playwright
+import os
+
+WEBHOOK_URL = os.getenv('WEBHOOK_URL')
+
+if not WEBHOOK_URL:
+    try:
+        from config import WEBHOOK_URL
+    except ImportError:
+        print("WEBHOOK_URL not found in environment or config.py")from playwright.sync_api import sync_playwright
 
 def run():
     with sync_playwright() as p:
