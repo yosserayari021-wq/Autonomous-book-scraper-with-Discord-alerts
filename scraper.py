@@ -5,9 +5,7 @@ from datetime import datetime
 import random
 import time
 import matplotlib.pyplot as plt
-
-WEBHOOK_URL = "https://discord.com/api/webhooks/1473825748707049585/EKbCsD9dkGAMPEU8rkNXkx39EyFwWgSyph7fcs5ZfZf79TcB4843PIaE62pwYWyJVTDW"
-
+from config import WEBHOOK_URL
 def send_discord_alert(item):
     stars = "⭐" * int(item['rating'])
     payload = {
