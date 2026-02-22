@@ -62,12 +62,13 @@ while current_url and page_count < 3:
               "scraped_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
               "rating": rating_num,
               "url": book_url}
+        all_data.append(item)
+
         is_match = any(word in item['title'].lower() for word in keywords)
 
         if rating_num == 5 and num < 20:
             send_discord_alert(item)
             print(f"📢 Alert sent to Discord for: {title}")
-            all_data.append(item)
             print(f"MATCH FOUND: {upc} | {title} | {is_match} | ({rating_num} stars) at £{num} | {book_url}")
         next_btn = soup.find("li", class_="next")
     if next_btn:
