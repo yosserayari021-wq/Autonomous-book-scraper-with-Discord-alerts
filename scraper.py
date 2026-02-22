@@ -13,7 +13,7 @@ if not WEBHOOK_URL:
     try:
         from config import WEBHOOK_URL
     except ImportError:
-        print("WEBHOOK_URL not found in environment or config.py")from playwright.sync_api import sync_playwright
+        print("WEBHOOK_URL not found in environment or config.py")
 
 def run():
     with sync_playwright() as p:
