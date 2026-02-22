@@ -6,6 +6,7 @@ import random
 import time
 import matplotlib.pyplot as plt
 import os
+from playwright.sync_api import sync_playwright
 
 WEBHOOK_URL = os.getenv('WEBHOOK_URL')
 
