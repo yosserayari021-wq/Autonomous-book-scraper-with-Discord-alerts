@@ -6,6 +6,27 @@ import random
 import time
 import matplotlib.pyplot as plt
 from config import WEBHOOK_URL
+from playwright.sync_api import sync_playwright
+
+def run():
+    with sync_playwright() as p:
+        # Launch the browser (headless=False means you can see it move!)
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+        
+        # Navigate to the site
+        page.goto("https://books.toscrape.com/")
+        
+        # Instead of parsing HTML text, we can wait for things to appear
+        page.wait_for_selector("article.product_pod")
+        
+        # We can even take a screenshot to prove it worked
+        page.screenshot(path="playwright_test.png")
+        print("Successfully captured the page with Playwright!")
+        
+        browser.close()
+
+run()
 def send_discord_alert(item):
     stars = "⭐" * int(item['rating'])
     payload = {
@@ -115,3 +136,4 @@ def upload_chart_to_discord():
     print(" Report uploaded to Discord!")
 
 upload_chart_to_discord()
+ 
